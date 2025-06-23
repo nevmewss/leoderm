@@ -5278,58 +5278,57 @@ document.addEventListener("DOMContentLoaded", function() {
   const btnNext = document.querySelector(".page--quiz__nav_forward");
   const btnBack = document.querySelector(".page--quiz__nav_back");
   const counter = document.querySelector(".page--quiz__counter");
-  let currentStep = 0;
+  let currentStep2 = 0;
   function updateStep() {
     steps.forEach((step, index) => {
-      step.style.display = index === currentStep ? "block" : "none";
+      step.style.display = index === currentStep2 ? "block" : "none";
     });
-    counter.textContent = `${currentStep + 1}\\${steps.length}`;
+    counter.textContent = `${currentStep2 + 1}\\${steps.length}`;
   }
   btnNext.addEventListener("click", () => {
-    if (currentStep < steps.length - 1) {
-      currentStep++;
+    if (currentStep2 < steps.length - 1) {
+      currentStep2++;
       updateStep();
     }
   });
   btnBack.addEventListener("click", () => {
-    if (currentStep > 0) {
-      currentStep--;
+    if (currentStep2 > 0) {
+      currentStep2--;
       updateStep();
     }
   });
   updateStep();
 });
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.querySelector(".page--quiz__form");
-  if (form) {
-    form.addEventListener("submit", function(e) {
-      e.preventDefault();
-      let error = 0;
-      const messageBox = form.querySelector(".page--quiz__form-message");
-      messageBox.innerHTML = "";
-      error += formValidate.getErrors(form);
-      const requiredGroups = form.querySelectorAll("[data-required-group]");
-      requiredGroups.forEach((group) => {
-        var _a;
-        const checkboxes = group.querySelectorAll('input[type="checkbox"]');
-        const oneChecked = [...checkboxes].some((cb) => cb.checked);
-        group.classList.remove("--form-error");
-        (_a = group.querySelector("[data-fls-form-error]")) == null ? void 0 : _a.remove();
-        if (!oneChecked) {
-          group.classList.add("--form-error");
-          group.insertAdjacentHTML("beforeend", `<div data-fls-form-error>Оберіть хоча б один варіант</div>`);
-          error++;
-        }
-      });
-      if (error > 0) {
-        messageBox.innerHTML = `<div class="form-errors">Будь ласка, заповніть всі обов’язкові поля.</div>`;
+function getQuizErrors(form) {
+  let error = 0;
+  const steps = form.querySelectorAll(".page--quiz__step");
+  steps.forEach((step) => {
+    const requiredInputs = step.querySelectorAll("[required]");
+    requiredInputs.forEach((input) => {
+      const value = input.value.trim();
+      const isEmail = input.type === "email";
+      const emailValid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,8})+$/.test(value);
+      if (isEmail && !emailValid || !value) {
+        input.classList.add("--form-error");
+        error++;
       } else {
-        formValidate.formClean(form);
-        console.log("✅ Форма успішно надіслана");
+        input.classList.remove("--form-error");
       }
     });
-  }
-});
+    const checkboxGroups = step.querySelectorAll("[data-required-group]");
+    checkboxGroups.forEach((group) => {
+      const checkboxes = group.querySelectorAll('input[type="checkbox"]');
+      const oneChecked = Array.from(checkboxes).some((cb) => cb.checked);
+      if (!oneChecked) {
+        group.classList.add("--form-error");
+        error++;
+      } else {
+        group.classList.remove("--form-error");
+      }
+    });
+  });
+  return error;
+}
 document.addEventListener("DOMContentLoaded", () => {
   const wrapper = document.querySelector(".page--services__services");
   const content = wrapper.querySelector(".page--services__content");
@@ -5347,6 +5346,7 @@ document.addEventListener("DOMContentLoaded", () => {
         label == null ? void 0 : label.classList.remove("open");
         body.style.height = "0px";
         item.removeAttribute("open");
+        body.hidden = true;
       }
     });
     requestAnimationFrame(() => {
@@ -5384,16 +5384,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const body = details.querySelector(".page--services__body");
     const label = details.querySelector(".page--services__label");
     if (!summary || !body || !label) return;
-    body.style.overflow = "hidden";
     if (index === 0) {
       details.setAttribute("open", "");
-      body.hidden = false;
-      body.style.height = body.scrollHeight + "px";
       label.classList.add("open");
+      body.hidden = false;
+      body.style.overflow = "hidden";
+      body.style.height = body.scrollHeight + "px";
       setTimeout(() => {
         body.style.height = "auto";
       }, 200);
     } else {
+      body.style.overflow = "hidden";
       body.style.height = "0px";
       body.hidden = true;
       details.removeAttribute("open");
@@ -5430,7 +5431,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 document.addEventListener("submit", async (e) => {
   const form = e.target.closest("form");
-  if (!form) return;
+  if (!form || form.classList.contains("page--quiz__form")) return;
   e.preventDefault();
   const error = formValidate.getErrors(form);
   if (error === 0) {
@@ -5453,6 +5454,28 @@ document.addEventListener("submit", async (e) => {
     } else {
       formValidate.formClean(form);
       window.flsPopup.open("thx");
+    }
+  } else {
+    console.warn("❌ Є помилки у формі");
+  }
+});
+document.addEventListener("submit", (e) => {
+  const form = e.target.closest("form");
+  if (!form || !form.classList.contains("page--quiz__form")) return;
+  e.preventDefault();
+  const steps = form.querySelectorAll(".page--quiz__step");
+  const lastStepIndex = steps.length - 1;
+  const messageBox = form.querySelector(".page--quiz__form-message");
+  if (typeof currentStep !== "undefined" && currentStep < lastStepIndex) return;
+  const error = getQuizErrors(form);
+  if (error === 0) {
+    formValidate.formClean(form);
+    window.flsPopup.open("thx");
+    if (messageBox) messageBox.textContent = "";
+  } else {
+    if (messageBox) {
+      messageBox.textContent = "Будь ласка, заповніть усі обов’язкові поля.";
+      messageBox.classList.add("error-message");
     }
   }
 });

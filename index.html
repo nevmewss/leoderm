@@ -12,9 +12,9 @@
         />
         <link rel="shortcut icon" href="assets/img/favicon.ico" />
         <!-- Leaflet CSS -->
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css?v=1750689633781" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css?v=1750694173039" />
         <!-- Leaflet JS -->
-        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js?v=1750689633781"></script>
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js?v=1750694173039"></script>
         <script>
             document.addEventListener("DOMContentLoaded", function () {
                 const map = L.map("leaflet-map").setView([49.8047604, 24.0457385], 15);
@@ -30,8 +30,8 @@
             });
         </script>
         <title>Home Page</title>
-        <script type="module" crossorigin="" src="./js/index.min.js?v=1750689633781"></script>
-        <link rel="stylesheet" crossorigin="" href="./css/index.min.css?v=1750689633781" />
+        <script type="module" crossorigin="" src="./js/index.min.js?v=1750694173039"></script>
+        <link rel="stylesheet" crossorigin="" href="./css/index.min.css?v=1750694173039" />
     </head>
     <body>
         <div class="wrapper">
@@ -157,18 +157,18 @@
                                 </h3>
                                 <div class="page--quiz__contact">
                                     <form class="page--quiz__form" action="#">
-                                        <div data-required-group="" class="page--quiz__step step_1">
+                                        <div class="page--quiz__step step_1">
                                             <div class="page--quiz__img">
                                                 <img src="./assets/img/quiz/01.svg" alt="На що" />
                                             </div>
                                             <h4 class="page--quiz__question">1. На що б ви хотіли вплинути?</h4>
-                                            <div class="page--quiz__wrapper">
+                                            <div data-required-group="" class="page--quiz__wrapper">
                                                 <label data-fls-checkbox="" class="checkbox">
                                                     <input
                                                         class="checkbox__input"
                                                         type="checkbox"
                                                         value="Втомлений вигляд, опущені кути рота"
-                                                        name="form[]"
+                                                        name="form[for_what]"
                                                     />
                                                     <span class="checkbox__text"
                                                         >Втомлений вигляд, опущені кути рота</span
@@ -179,7 +179,7 @@
                                                         class="checkbox__input"
                                                         type="checkbox"
                                                         value="Зморшки, старіння обличчя"
-                                                        name="form[]"
+                                                        name="form[for_what]"
                                                     />
                                                     <span class="checkbox__text">Зморшки, старіння обличчя</span>
                                                 </label>
@@ -188,7 +188,7 @@
                                                         class="checkbox__input"
                                                         type="checkbox"
                                                         value="Почервоніння, судини, утворення на шкірі"
-                                                        name="form[]"
+                                                        name="form[for_what]"
                                                     />
                                                     <span class="checkbox__text"
                                                         >Почервоніння, судини, утворення на шкірі</span
@@ -199,7 +199,7 @@
                                                         class="checkbox__input"
                                                         type="checkbox"
                                                         value="Друге підборіддя, опущений контур обличчя"
-                                                        name="form[]"
+                                                        name="form[for_what]"
                                                     />
                                                     <span class="checkbox__text"
                                                         >Друге підборіддя, опущений контур обличчя</span
@@ -210,7 +210,7 @@
                                                         class="checkbox__input"
                                                         type="checkbox"
                                                         value="Висока пітливість на руках, під пахвами та на стопах"
-                                                        name="form[]"
+                                                        name="form[for_what]"
                                                     />
                                                     <span class="checkbox__text"
                                                         >Висока пітливість на руках, під пахвами та на стопах</span
@@ -218,18 +218,18 @@
                                                 </label>
                                             </div>
                                         </div>
-                                        <div data-required-group="" class="page--quiz__step step_2">
+                                        <div class="page--quiz__step step_2">
                                             <div class="page--quiz__img">
                                                 <img src="./assets/img/quiz/02.svg" alt="Результат" />
                                             </div>
                                             <h4 class="page--quiz__question">2. Який результат ви хочете отримати?</h4>
-                                            <div class="page--quiz__wrapper">
+                                            <div data-required-group="" class="page--quiz__wrapper">
                                                 <label data-fls-checkbox="" class="checkbox">
                                                     <input
                                                         class="checkbox__input"
                                                         type="checkbox"
                                                         value="Молодший вигляд, чіткі контури обличчя"
-                                                        name="form[]"
+                                                        name="form[result]"
                                                     />
                                                     <span class="checkbox__text"
                                                         >Молодший вигляд, чіткі контури обличчя</span
@@ -240,7 +240,7 @@
                                                         class="checkbox__input"
                                                         type="checkbox"
                                                         value="Свіжа шкіра, без почервонінь та утворень"
-                                                        name="form[]"
+                                                        name="form[result]"
                                                     />
                                                     <span class="checkbox__text"
                                                         >Свіжа шкіра, без почервонінь та утворень</span
@@ -251,7 +251,7 @@
                                                         class="checkbox__input"
                                                         type="checkbox"
                                                         value="Здоровий колір обличчя"
-                                                        name="form[]"
+                                                        name="form[result]"
                                                     />
                                                     <span class="checkbox__text">Здоровий колір обличчя</span>
                                                 </label>
@@ -260,7 +260,7 @@
                                                         class="checkbox__input"
                                                         type="checkbox"
                                                         value="Усунути відчуття дискомфорту по тілу від пітливості"
-                                                        name="form[]"
+                                                        name="form[result]"
                                                     />
                                                     <span class="checkbox__text"
                                                         >Усунути відчуття дискомфорту по тілу від пітливості</span
@@ -268,20 +268,20 @@
                                                 </label>
                                             </div>
                                         </div>
-                                        <div data-required-group="" class="page--quiz__step step_3">
+                                        <div class="page--quiz__step step_3">
                                             <div class="page--quiz__img">
                                                 <img src="./assets/img/quiz/03.svg" alt="Формат" />
                                             </div>
                                             <h4 class="page--quiz__question">
                                                 3. Який формат процедури вам підходить більше?
                                             </h4>
-                                            <div class="page--quiz__wrapper">
+                                            <div data-required-group="" class="page--quiz__wrapper">
                                                 <label data-fls-checkbox="" class="checkbox">
                                                     <input
                                                         class="checkbox__input"
                                                         type="checkbox"
                                                         value="Швидка процедура (30-40 хв)"
-                                                        name="form[]"
+                                                        name="form[format]"
                                                     />
                                                     <span class="checkbox__text">Швидка процедура (30-40 хв)</span>
                                                 </label>
@@ -290,7 +290,7 @@
                                                         class="checkbox__input"
                                                         type="checkbox"
                                                         value="Триваліша процедура (1-1,5 год)"
-                                                        name="form[]"
+                                                        name="form[format]"
                                                     />
                                                     <span class="checkbox__text">Триваліша процедура (1-1,5 год)</span>
                                                 </label>
@@ -299,7 +299,7 @@
                                                         class="checkbox__input"
                                                         type="checkbox"
                                                         value="Ін'єкції, лазери, апаратні методики"
-                                                        name="form[]"
+                                                        name="form[format]"
                                                     />
                                                     <span class="checkbox__text"
                                                         >Ін'єкції, лазери, апаратні методики</span
@@ -310,24 +310,24 @@
                                                         class="checkbox__input"
                                                         type="checkbox"
                                                         value="Не знаю, хочу консультацію"
-                                                        name="form[]"
+                                                        name="form[format]"
                                                     />
                                                     <span class="checkbox__text">Не знаю, хочу консультацію</span>
                                                 </label>
                                             </div>
                                         </div>
-                                        <div data-required-group="" class="page--quiz__step step_4">
+                                        <div class="page--quiz__step step_4">
                                             <div class="page--quiz__img">
                                                 <img src="./assets/img/quiz/04.svg" alt="Дата" />
                                             </div>
                                             <h4 class="page--quiz__question">4. Коли ви хочете почати?</h4>
-                                            <div class="page--quiz__wrapper">
+                                            <div data-required-group="" class="page--quiz__wrapper">
                                                 <label data-fls-checkbox="" class="checkbox">
                                                     <input
                                                         class="checkbox__input"
                                                         type="checkbox"
                                                         value="Записатися зараз"
-                                                        name="form[]"
+                                                        name="form[when]"
                                                     />
                                                     <span class="checkbox__text">Записатися зараз</span>
                                                 </label>
@@ -336,7 +336,7 @@
                                                         class="checkbox__input"
                                                         type="checkbox"
                                                         value="Найближчим часом"
-                                                        name="form[]"
+                                                        name="form[when]"
                                                     />
                                                     <span class="checkbox__text">Найближчим</span>
                                                 </label>
@@ -345,7 +345,7 @@
                                                         class="checkbox__input"
                                                         type="checkbox"
                                                         value="Просто цікавлюсь"
-                                                        name="form[]"
+                                                        name="form[when]"
                                                     />
                                                     <span class="checkbox__text">Просто цікавлюсь</span>
                                                 </label>
@@ -361,7 +361,7 @@
                                             <div class="page--quiz__wrapper">
                                                 <div class="page--quiz__item">
                                                     <input
-                                                        data-required=""
+                                                        required
                                                         type="email"
                                                         name="form[email]"
                                                         data-fls-form-errtext="Введіть коректний email"
@@ -371,7 +371,7 @@
                                                 </div>
                                                 <div class="page--quiz__item">
                                                     <input
-                                                        data-required=""
+                                                        required
                                                         type="tel"
                                                         name="form[tel]"
                                                         data-fls-form-errtext="Введіть телефон"
