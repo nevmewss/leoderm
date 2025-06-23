@@ -5379,16 +5379,26 @@ document.addEventListener("DOMContentLoaded", () => {
     if (expanded) expandAll();
     else collapseToLimit();
   });
-  items.forEach((details) => {
+  items.forEach((details, index) => {
     const summary = details.querySelector("summary");
     const body = details.querySelector(".page--services__body");
     const label = details.querySelector(".page--services__label");
     if (!summary || !body || !label) return;
     body.style.overflow = "hidden";
-    body.style.height = "0px";
-    body.hidden = true;
-    details.removeAttribute("open");
-    label.classList.remove("open");
+    if (index === 0) {
+      details.setAttribute("open", "");
+      body.hidden = false;
+      body.style.height = body.scrollHeight + "px";
+      label.classList.add("open");
+      setTimeout(() => {
+        body.style.height = "auto";
+      }, 200);
+    } else {
+      body.style.height = "0px";
+      body.hidden = true;
+      details.removeAttribute("open");
+      label.classList.remove("open");
+    }
     summary.addEventListener("click", (e) => {
       e.preventDefault();
       const isOpen = details.hasAttribute("open");
